@@ -26,9 +26,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo BASEURL; ?>customers/update.php">Update</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo BASEURL; ?>customers/delete.php">Delete</a>
-                </li>
                 </ul>
             </div>
         </nav>  

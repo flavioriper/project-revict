@@ -17,16 +17,15 @@ class DaoCustomers {
         return self::$instance;
     }
     
-    public function read_id($cod) {
+    public function read_id($id) {
         try {
-            $sql = "SELECT * FROM usuario WHERE cod_usuario = :cod";
+            $sql = "SELECT * FROM customers WHERE id = :id";
             $p_sql = Connection::getInstance('../configdb.ini')->prepare($sql);
-            $p_sql->bindValue(":cod", $cod);
+            $p_sql->bindValue(":id", $id);
             $p_sql->execute();
             return $this->setUsuario($p_sql->fetch(PDO::FETCH_ASSOC));
         } catch (Exception $e) {
-            $_SESSION['message'] = $e -> GetMessage();
-            $_SESSION['type'] = 'danger';
+            print($e);
         }
     } 
 
@@ -88,6 +87,47 @@ class DaoCustomers {
         } catch (Exception $e) {
             print($e);
         }
-    } 
+    }
+
+    public function update(PojoCustomer $customer) {
+        try {
+            $sql = "UPDATE customers SET
+                name = :name,
+                phone = :phone,
+                cpf = :cpf,
+                adress = :adress,
+                zip = :zip,
+                bill = :bill WHERE id=:id";
+            
+            $p_sql = connection::getInstance('../configdb.ini')->prepare($sql);
+
+            $p_sql->bindValue(':id', $customer->getId(), PDO::PARAM_INT);
+            $p_sql->bindValue(':name', $customer->getName(), PDO::PARAM_STR);
+            $p_sql->bindValue(':phone', $customer->getPhone(), PDO::PARAM_STR);
+            $p_sql->bindValue(':cpf', $customer->getCpf(), PDO::PARAM_STR);
+            $p_sql->bindValue(':adress', $customer->getAdress(), PDO::PARAM_STR);
+            $p_sql->bindValue(':zip', $customer->getZip(), PDO::PARAM_STR);
+            $p_sql->bindValue(':bill', $customer->getBill(), PDO::PARAM_INT);
+
+            return $p_sql->execute();
+
+        } catch (Exception $e) {
+            print($e);
+        }
+    }
+
+    public function delete(PojoCustomer $customer) {
+        try {
+            $sql = "DELETE FROM customers WHERE id = :id";
+
+            $p_sql = connection::getInstance('../configdb.ini')->prepare($sql);
+
+            $p_sql->bindValue(':id', $customer->getId(), PDO::PARAM_INT);
+
+            return $p_sql->execute();
+        } catch (Exception $e) {
+            print($e);
+        }
+    }
 }
 
