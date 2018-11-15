@@ -1,7 +1,7 @@
 <?php 
     require_once '../config.php';
     include (HEADER_TEMPLATE); 
-    require_once ('dao_customers.php');
+    require_once 'dao_customers.php';
 
     $user = DaoCustomers::getInstance()->read_all();
 ?>

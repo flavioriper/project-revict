@@ -1,6 +1,6 @@
 <?php 
-require_once '../connection.php'; 
-require_once ('pojo_customers.php');
+require_once ABSPATH . 'connection.php'; 
+require_once ABSPATH . '/customers/pojo_customers.php';
 
 class DaoCustomers {
 
@@ -20,7 +20,7 @@ class DaoCustomers {
     public function read_id($id) {
         try {
             $sql = "SELECT * FROM customers WHERE id = :id";
-            $p_sql = Connection::getInstance('../configdb.ini')->prepare($sql);
+            $p_sql = Connection::getInstance(ABSPATH . 'configdb.ini')->prepare($sql);
             $p_sql->bindValue(":id", $id);
             $p_sql->execute();
             return $this->setUsuario($p_sql->fetch(PDO::FETCH_ASSOC));
@@ -32,7 +32,7 @@ class DaoCustomers {
     public function read_all() {
         try {
             $sql = "SELECT * FROM customers;";
-            $p_sql = Connection::getInstance('../configdb.ini')->prepare($sql);
+            $p_sql = Connection::getInstance(ABSPATH . 'configdb.ini')->prepare($sql);
             $p_sql->execute();
             
             foreach ($p_sql->fetchAll(PDO::FETCH_ASSOC) as $data) {
@@ -73,7 +73,7 @@ class DaoCustomers {
                 :zip,
                 :bill)";
 
-            $p_sql = connection::getInstance('../configdb.ini')->prepare($sql);
+            $p_sql = connection::getInstance(ABSPATH . 'configdb.ini')->prepare($sql);
 
             $p_sql->bindValue(':nome', $customer->getName());
             $p_sql->bindValue(':phone', $customer->getPhone());
@@ -99,7 +99,7 @@ class DaoCustomers {
                 zip = :zip,
                 bill = :bill WHERE id=:id";
             
-            $p_sql = connection::getInstance('../configdb.ini')->prepare($sql);
+            $p_sql = connection::getInstance(ABSPATH . 'configdb.ini')->prepare($sql);
 
             $p_sql->bindValue(':id', $customer->getId(), PDO::PARAM_INT);
             $p_sql->bindValue(':name', $customer->getName(), PDO::PARAM_STR);
@@ -120,7 +120,7 @@ class DaoCustomers {
         try {
             $sql = "DELETE FROM customers WHERE id = :id";
 
-            $p_sql = connection::getInstance('../configdb.ini')->prepare($sql);
+            $p_sql = connection::getInstance(ABSPATH . 'configdb.ini')->prepare($sql);
 
             $p_sql->bindValue(':id', $customer->getId(), PDO::PARAM_INT);
 

@@ -1,8 +1,8 @@
 <?php
 
-require_once '../connection.php';
-require_once 'pojo_customers.php';
-require_once 'dao_customers.php';
+require_once ABSPATH . 'connection.php';
+require_once ABSPATH . '/customers/pojo_customers.php';
+require_once ABSPATH . '/customers/dao_customers.php';
 
 function insert() {
     if (!empty($_POST['name'])) {
@@ -62,6 +62,11 @@ function delete() {
             print($e);
         }
     }
+}
+
+function totalCount() {
+    $user = DaoCustomers::getInstance()->read_all();
+    return count($user);
 }
 
 ?>
