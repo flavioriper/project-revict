@@ -31,14 +31,17 @@ class DaoCustomers {
 
     public function read_all() {
         try {
+            $result = array();
             $sql = "SELECT * FROM customers;";
             $p_sql = Connection::getInstance(ABSPATH . 'configdb.ini')->prepare($sql);
-            $p_sql->execute();
-            
-            foreach ($p_sql->fetchAll(PDO::FETCH_ASSOC) as $data) {
-                $result[] = $this->setUsuario($data);
+            if ($p_sql->execute()) {
+                foreach ($p_sql->fetchAll(PDO::FETCH_ASSOC) as $data) {
+                    $result[] = $this->setUsuario($data);
+                }
+                return $result;
+            } else {
+                return 'Nenhum resultado encontrado!';
             }
-            return $result;
         } catch (Exception $e) {
             print($e);
         }

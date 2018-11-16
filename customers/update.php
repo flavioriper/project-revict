@@ -22,10 +22,12 @@
 </div>
 <hr />
 <?php 
-    if (isset($_POST['id']) && $_POST['id'] > 0) {
+    if (isset($_POST['id']) && $_POST['id'] != 0) {
         if (test_id($_POST['id'])) {
             include('../misc/update_list.php');
         }
+    } else if (isset($_POST['id']) && $_POST['id'] == 0) {
+        echo 'Não existem usuários!';
     }
  ?>
 <?php include (FOOTER_TEMPLATE); ?>

@@ -5,17 +5,24 @@ require_once ABSPATH . '/customers/pojo_customers.php';
 require_once ABSPATH . '/customers/dao_customers.php';
 
 function insert() {
-    if (!empty($_POST['name'])) {
+    if (!empty($_POST['customer'])) {
+        $data = $_POST['customer'];
+        print_r($data);
         $customer = new PojoCustomer;
-        $customer->setName($_POST['name']);
-        $customer->setPhone($_POST['phone']);
-        $customer->setCpf($_POST['cpf']);
-        $customer->setAdress($_POST['adress']);
-        $customer->setZip($_POST['zip']);
-        $customer->setBill($_POST['bill']);
+        $customer->setName($data["'name'"]);
+        $customer->setPhone($data["'phone'"]);
+        $customer->setCpf($data["'cpf'"]);
+        $customer->setAdress($data["'adress'"]);
+        $customer->setZip($data["'zip'"]);
+        $customer->setBill($data["'bill'"]);
         
         $user = DaoCustomers::getInstance()->insert($customer);
     }
+}
+
+function viewListUpdate($id) {
+    $user = DaoCustomers::getInstance()->read_id($id);
+    return $user;
 }
 
 function test_id($id) {
@@ -65,8 +72,16 @@ function delete() {
 }
 
 function totalCount() {
-    $user = DaoCustomers::getInstance()->read_all();
-    return count($user);
+    try {
+        $user = DaoCustomers::getInstance()->read_all();
+        if (count($user) > 0){ 
+            return count($user);
+        } else {
+            return '0';
+        }
+    } catch (Exception $e) {
+        print($e);
+    }
 }
 
 ?>
