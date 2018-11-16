@@ -5,13 +5,13 @@
 ?>
 <?php include (HEADER_TEMPLATE); ?>
 
-<div class="row justify-content-end" style="height: 2em;">
-    <div class="col-md-4">
+<div class="row justify-content-end" style="height: 5em;">
+    <div class="col-md-4 col-sm-12">
         <span id="success-alert"></span>
     </div>
 </div>
 <form action="create.php" id="create-req" method="post">
-<div class="row m-5 p-5">
+<div class="row m-md-5 p-md-5">
     <div class="col-md-12">
         <div class="input-group mb-3">
             <input type="text" class="form-control" id="name" name ="customer['name']" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' placeholder="Nome Completo" aria-describedby="basic-addon2" required>

@@ -6,7 +6,7 @@
     $user = readAll();
 ?>
 
-<div class="row pt-5">
+<div class="row pt-md-5">
     <div class="col-md-12 scrollbar">
         <table class="table table-bordered">
             <thead>
