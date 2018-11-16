@@ -1,4 +1,4 @@
-var frm = $("#teste");
+var frm = $("#create-req");
 frm.submit(function(ev) {
     if ($("#phone").val().toString().length < 10 || $("#phone").val().toString().length > 11) {
         alert('Telefone Inválido! Código de área + número');
@@ -12,7 +12,7 @@ frm.submit(function(ev) {
         alert('CEP inválido!');
         return false;
     }
-    var teste = $("#teste").serializeArray();
+    var teste = $("#create-req").serializeArray();
     ev.preventDefault();
     $.ajax({
         type: frm.attr('method'),

@@ -22,6 +22,11 @@ function insert() {
 
 function viewListUpdate($id) {
     $user = DaoCustomers::getInstance()->read_id($id);
+    if (!empty($user->getId())) {
+        $user = $user;
+    } else {
+        $user->setId("0");
+    }
     return $user;
 }
 
@@ -40,17 +45,17 @@ function test_id($id) {
 }
 
 function edit() {
-    if (!empty($_POST['up-name'])) {
+    if (!empty($_POST['customer'])) {
         try{
+            $data = $_POST['customer'];
             $customer = new PojoCustomer;
-            $customer->setId($_POST['id']);
-            $customer->setName($_POST['up-name']);
-            $customer->setPhone($_POST['phone']);
-            $customer->setCpf($_POST['cpf']);
-            $customer->setAdress($_POST['adress']);
-            $customer->setZip($_POST['zip']);
-            $customer->setBill($_POST['bill']);
-            print_r($customer);
+            $customer->setId($data["'id'"]);
+            $customer->setName($data["'name'"]);
+            $customer->setPhone($data["'phone'"]);
+            $customer->setCpf($data["'cpf'"]);
+            $customer->setAdress($data["'adress'"]);
+            $customer->setZip($data["'zip'"]);
+            $customer->setBill($data["'bill'"]);
             
             $customer = DaoCustomers::getInstance()->update($customer);
         } catch (Exception $e) {
@@ -82,6 +87,11 @@ function totalCount() {
     } catch (Exception $e) {
         print($e);
     }
+}
+
+function readAll() {
+    $user = DaoCustomers::getInstance()->read_all();
+    return $user;
 }
 
 ?>

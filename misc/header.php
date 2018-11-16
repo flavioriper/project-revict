@@ -6,6 +6,13 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo BASEURL; ?>css/custom.css">
+    <style>
+        .scrollbar {
+        box-sizing: border-box !important;
+        height: 550px !important;
+        overflow-y: auto !important;
+}
+    </style>
     <title>Revict Project</title>
   </head>
   <body>

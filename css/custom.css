@@ -17,3 +17,9 @@ footer {
 main {
     padding-top: 1em;
 }
+
+.scrollbar {
+    box-sizing: border-box !important;
+    height: 400px !important;
+    overflow-y: auto !important;
+}

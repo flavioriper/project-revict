@@ -1,15 +1,13 @@
- <?php $user = viewListUpdate($_POST['id']); ?>
-
-<div class="row justify-content-end" style="height: 2em;">
+<div class="row" style="height: 2em;">
     <div class="col-md-4">
         <span id="success-alert"></span>
     </div>
 </div>
-<form action="update.php" id="teste" method="post">
+<form action="update.php" id="update-req" method="post">
 <div class="row mt-3 px-5 mx-5 justify-content-end">
     <div class="col-md-2">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" name ="id" value="<?php echo $user->getId(); ?>" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' readonly>
+            <input type="text" class="form-control" name ="customer['id']" value="<?php echo $user->getId(); ?>" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' readonly>
         </div>
     </div>
 </div>
@@ -63,7 +61,7 @@
 <div class="row mt-5 d-flex flex-row justify-content-center">
     <button type="submit" class="btn btn-outline-secondary">Salvar</button>
 </form>
-<form action="update.php" method="post">
+<form action="update.php" id="delete-req" method="post">
     <input type="number" name="id-delete" value="<?php echo $user->getId(); ?>" style="display:none;">
     <button type="submit" class="btn btn-outline-danger ml-5 mr-5">Excluir</button>
     </form>

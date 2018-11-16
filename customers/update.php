@@ -22,12 +22,14 @@
 </div>
 <hr />
 <?php 
-    if (isset($_POST['id']) && $_POST['id'] != 0) {
-        if (test_id($_POST['id'])) {
+    if (isset($_POST['id'])) {
+        $user = viewListUpdate($_POST['id']);
+        if ($user->getId() != 0) {
             include('../misc/update_list.php');
+        } else {
+            echo "Nenhum registro encontrado!";
         }
-    } else if (isset($_POST['id']) && $_POST['id'] == 0) {
-        echo 'Não existem usuários!';
-    }
+    } 
  ?>
 <?php include (FOOTER_TEMPLATE); ?>
+<script src="../js/update-validation.js"></script>

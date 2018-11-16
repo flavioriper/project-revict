@@ -10,7 +10,7 @@
         <span id="success-alert"></span>
     </div>
 </div>
-<form action="create.php" id="teste" method="post">
+<form action="create.php" id="create-req" method="post">
 <div class="row m-5 p-5">
     <div class="col-md-12">
         <div class="input-group mb-3">
