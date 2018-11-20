@@ -8,50 +8,50 @@
         private function __clone(){}
         private function __wakeup(){}
 
-        private static function load(string $arquivo): array {
+        private static function load(string $file): array {
 
-            if (file_exists($arquivo)) {
-                $parametros = parse_ini_file($arquivo);
+            if (file_exists($file)) {
+                $parameters = parse_ini_file($file);
             } else {
-                throw new Exception ('Erro: Arquivo não encontrado');
+                throw new Exception ('Error: file not found');
             }
-            return $parametros;
+            return $parameters;
         }
 
-        private static function make(array $parametros): PDO {
+        private static function make(array $parameters): PDO {
 
-            $sgdb = isset($parametros['sgdb']) ? $parametros['sgdb'] : NULL;
-            $usuario = isset($parametros['usuario']) ? $parametros['usuario'] : NULL;
-            $senha = isset($parametros['senha']) ? $parametros['senha'] : NULL;
-            $banco = isset($parametros['banco']) ? $parametros['banco'] : NULL;
-            $servidor = isset($parametros['servidor']) ? $parametros['servidor'] : NULL;
-            $porta = isset($parametros['porta']) ? $parametros['porta'] : NULL;
+            $sgdb = isset($parameters['sgdb']) ? $parameters['sgdb'] : NULL;
+            $user = isset($parameters['user']) ? $parameters['user'] : NULL;
+            $pass = isset($parameters['pass']) ? $parameters['pass'] : NULL;
+            $database = isset($parameters['database']) ? $parameters['database'] : NULL;
+            $host = isset($parameters['host']) ? $parameters['host'] : NULL;
+            $port = isset($parameters['port']) ? $parameters['port'] : NULL;
 
             if(!is_null($sgdb)) {
-                // Cria a String de Conexão e Seleciona o banco de dados
+                // Create the connection string and select the property Database
                 switch (strtoupper($sgdb)) {
-                    case 'MYSQL' : $porta = isset($porta) ? $porta : 3306 ; return new PDO("mysql:host={$servidor};port={$porta};dbname={$banco}", $usuario, $senha);
+                    case 'MYSQL' : $port = isset($port) ? $port : 3306 ; return new PDO("mysql:host={$host};port={$port};dbname={$database}", $user, $pass);
                        break;
-                    case 'MSSQL' : $porta = isset($porta) ? $porta : 1433 ;return new PDO("mssql:host={$servidor},{$porta};dbname={$banco}", $usuario, $senha);
+                    case 'MSSQL' : $port = isset($port) ? $port : 1433 ;return new PDO("mssql:host={$host},{$port};dbname={$database}", $user, $pass);
                        break;
-                    case 'PGSQL' : $porta = isset($porta) ? $porta : 5432 ;return new PDO("pgsql:dbname={$banco}; user={$usuario}; password={$senha}, host={$servidor};port={$porta}");
+                    case 'PGSQL' : $port = isset($port) ? $port : 5432 ;return new PDO("pgsql:dbname={$database}; user={$user}; password={$pass}, host={$host};port={$port}");
                        break;
-                    case 'SQLITE' : return new PDO("sqlite:{$banco}");
+                    case 'SQLITE' : return new PDO("sqlite:{$database}");
                        break;
-                    case 'OCI8' : return new PDO("oci:dbname={$banco}", $usuario, $senha);
+                    case 'OCI8' : return new PDO("oci:dbname={$database}", $user, $pass);
                        break;
-                    case 'FIREBIRD' : return new PDO("firebird:dbname={$banco}",$usuario, $senha);
+                    case 'FIREBIRD' : return new PDO("firebird:dbname={$database}",$user, $pass);
                        break;
                 }
             } else {
-                throw new Exception('Erro: tipo de banco de dados não informado');
+                throw new Exception('Error: no Database found');
             }
         }
 
-        public static function getInstance(string $arquivo):PDO {
+        public static function getInstance(string $file):PDO {
 
             if (self::$connection == NULL) {
-                self::$connection = self::make(self::load($arquivo));
+                self::$connection = self::make(self::load($file));
                 self::$connection -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 self::$connection -> exec("set names utf8");
             }

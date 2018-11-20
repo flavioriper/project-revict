@@ -1,3 +1,4 @@
+<!--Update list template-->
 <div class="row" style="height: 4em;">
     <div class="col-md-4">
         <span id="success-alert"></span>
@@ -59,10 +60,10 @@
     </div>
 </div>
 <div class="row mt-5 d-flex flex-row justify-content-center">
-    <button type="submit" class="btn btn-outline-secondary">Salvar</button>
+    <button type="submit" class="btn btn-outline-secondary">Save</button>
 </form>
 <form action="update.php" id="delete-req" method="post">
     <input type="number" name="id-delete" value="<?php echo $user->getId(); ?>" style="display:none;">
-    <button type="submit" class="btn btn-outline-danger ml-5 mr-5">Excluir</button>
+    <button type="submit" class="btn btn-outline-danger ml-5 mr-5">Delete</button>
     </form>
 </div>

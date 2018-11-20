@@ -1,9 +1,11 @@
 <?php
+//It's a extend of Dao_Customers, preparing the data to fit the method's requisites
 
 require_once ABSPATH . 'connection.php';
 require_once ABSPATH . '/customers/pojo_customers.php';
 require_once ABSPATH . '/customers/dao_customers.php';
 
+//Get the data from POST and send it to dao_customer's insert method.
 function insert() {
     if (!empty($_POST['customer'])) {
         $data = $_POST['customer'];
@@ -20,6 +22,7 @@ function insert() {
     }
 }
 
+//Get the data from Database for ID and return the result match as an array
 function viewListUpdate($id) {
     $user = DaoCustomers::getInstance()->read_id($id);
     if (!empty($user->getId())) {
@@ -30,6 +33,7 @@ function viewListUpdate($id) {
     return $user;
 }
 
+//Check if the ID exist in Database
 function test_id($id) {
     try {
         $user = DaoCustomers::getInstance()->read_id($id);
@@ -44,6 +48,7 @@ function test_id($id) {
     }
 }
 
+//Get the data from POST and send it to dao_customer's update method.
 function edit() {
     if (!empty($_POST['customer'])) {
         try{
@@ -64,6 +69,7 @@ function edit() {
     }
 }
 
+//Get the data from POST and send it to dao_customer's delete method.
 function delete() {
     if (!empty($_POST['id-delete'])) {
         try {
@@ -76,6 +82,7 @@ function delete() {
     }
 }
 
+//Show the length of database registers 
 function totalCount() {
     try {
         $user = DaoCustomers::getInstance()->read_all();
@@ -89,6 +96,7 @@ function totalCount() {
     }
 }
 
+//Return all the database matchs
 function readAll() {
     $user = DaoCustomers::getInstance()->read_all();
     return $user;

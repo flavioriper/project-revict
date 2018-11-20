@@ -1,3 +1,4 @@
+<!--Update page template-->
 <?php 
     require_once '../config.php';
     require_once 'functions.php';
@@ -27,7 +28,7 @@
         if ($user->getId() != 0) {
             include('../misc/update_list.php');
         } else {
-            echo "Nenhum registro encontrado!";
+            echo "No match found!";
         }
     } 
  ?>

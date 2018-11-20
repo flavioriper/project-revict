@@ -1,6 +1,7 @@
 <?php 
 require_once ABSPATH . 'connection.php'; 
-
+    
+    //Class to manipulate the DataBase as OOP
     class PojoCustomer {
 
         private $id;

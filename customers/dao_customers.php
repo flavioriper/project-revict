@@ -2,6 +2,7 @@
 require_once ABSPATH . 'connection.php'; 
 require_once ABSPATH . '/customers/pojo_customers.php';
 
+//Class with the CRUD Methods to manipulate the Database
 class DaoCustomers {
 
     public static $instance;
@@ -9,7 +10,8 @@ class DaoCustomers {
     private function __construct() {
         //
     }
- 
+    
+    //Creates a self instance of the class checking if it hasn't be already create
     public static function getInstance() {
         if (!isset(self::$instance))
             self::$instance = new DaoCustomers();
@@ -17,18 +19,20 @@ class DaoCustomers {
         return self::$instance;
     }
     
+    //Read only one register per time by ID
     public function read_id($id) {
         try {
             $sql = "SELECT * FROM customers WHERE id = :id";
             $p_sql = Connection::getInstance(ABSPATH . 'configdb.ini')->prepare($sql);
             $p_sql->bindValue(":id", $id);
             $p_sql->execute();
-            return $this->setUsuario($p_sql->fetch(PDO::FETCH_ASSOC));
+            return $this->setUser($p_sql->fetch(PDO::FETCH_ASSOC));
         } catch (Exception $e) {
             print($e);
         }
     } 
 
+    //Return all the registers from the Database
     public function read_all() {
         try {
             $result = array();
@@ -36,18 +40,19 @@ class DaoCustomers {
             $p_sql = Connection::getInstance(ABSPATH . 'configdb.ini')->prepare($sql);
             if ($p_sql->execute()) {
                 foreach ($p_sql->fetchAll(PDO::FETCH_ASSOC) as $data) {
-                    $result[] = $this->setUsuario($data);
+                    $result[] = $this->setUser($data);
                 }
                 return $result;
             } else {
-                return 'Nenhum resultado encontrado!';
+                return 'No match found!';
             }
         } catch (Exception $e) {
             print($e);
         }
     }
 
-    private function setUsuario($row) {
+    //Construct the model to add the user into Database
+    private function setUser($row) {
         $pojo = new PojoCustomer;
         $pojo->setId($row['id']);
         $pojo->setName($row['name']);
@@ -59,6 +64,7 @@ class DaoCustomers {
         return $pojo;
     }
 
+    //Insert the data into Database
     public function insert(PojoCustomer $customer) {
         try {
             $sql = "INSERT INTO customers (      
@@ -69,7 +75,7 @@ class DaoCustomers {
                 zip,
                 bill) 
                 VALUES (
-                :nome,
+                :name,
                 :phone,
                 :cpf,
                 :adress,
@@ -78,7 +84,7 @@ class DaoCustomers {
 
             $p_sql = connection::getInstance(ABSPATH . 'configdb.ini')->prepare($sql);
 
-            $p_sql->bindValue(':nome', $customer->getName());
+            $p_sql->bindValue(':name', $customer->getName());
             $p_sql->bindValue(':phone', $customer->getPhone());
             $p_sql->bindValue(':cpf', $customer->getCpf());
             $p_sql->bindValue(':adress', $customer->getAdress());
@@ -92,6 +98,8 @@ class DaoCustomers {
         }
     }
 
+
+    //Update the data from Database
     public function update(PojoCustomer $customer) {
         try {
             $sql = "UPDATE customers SET
@@ -119,6 +127,7 @@ class DaoCustomers {
         }
     }
 
+    //Delete data from Database
     public function delete(PojoCustomer $customer) {
         try {
             $sql = "DELETE FROM customers WHERE id = :id";

@@ -1,3 +1,4 @@
+<!--View template page-->
 <?php 
     require_once '../config.php';
     include (HEADER_TEMPLATE);
@@ -12,12 +13,12 @@
             <thead>
                 <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Telefone</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
                 <th scope="col">CPF</th>
-                <th scope="col">Endereço</th>
-                <th scope="col">CEP</th>
-                <th scope="col">Valor</th>
+                <th scope="col">Adress</th>
+                <th scope="col">ZIP</th>
+                <th scope="col">Bills</th>
                 </tr>
             </thead>
             <tbody>

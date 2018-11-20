@@ -6,6 +6,7 @@
 ?>
 <?php include (HEADER_TEMPLATE); ?>
 
+<!--The index dashboard-->
 <div class="text-center cover-container d-flex w-100 h-100 p-3 mx-auto flex-column mt-5">
     <main role="main mt-5" class="inner cover">
         <h1 class="cover-heading mt-5">P-REVICT APP</h1>

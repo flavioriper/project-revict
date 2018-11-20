@@ -1,15 +1,15 @@
 <?php
-/** caminho absoluto para a pasta do sistema */
+// Absolute path to local system app
 if (!defined('ABSPATH')){
     define('ABSPATH', dirname(__FILE__) . '/');
 }
 
-/** caminho no server para o sistema */
+// Path to the server files
 if (!defined('BASEURL')){
-    define('BASEURL', '/p-revict/');
+    define('BASEURL', '/p-revict/'); // Change the BASEURL to fit your enviroment configuration 
 }
 
-/** caminhos dos templates e footer */
+// Templates path 
 define('HEADER_TEMPLATE', ABSPATH . 'misc/header.php');
 define('FOOTER_TEMPLATE', ABSPATH . 'misc/footer.php');
 
